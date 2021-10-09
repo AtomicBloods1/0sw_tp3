@@ -111,7 +111,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 hframes = 9
 vframes = 6
-frame = 27
+frame = 28
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 position = Vector2( 2.5, 6.5 )
@@ -128,3 +128,5 @@ anims/Run = SubResource( 3 )
 anims/attack = SubResource( 4 )
 anims/fall = SubResource( 5 )
 anims/jump = SubResource( 6 )
+
+[node name="AnimationTree" type="AnimationTree" parent="player"]

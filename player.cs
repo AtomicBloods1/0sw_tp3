@@ -14,16 +14,20 @@ public class player : KinematicBody2D
 
     bool facing_right = true;
 
-
     Vector2 motion = new Vector2();
 
     Sprite currentSprite;
     AnimationPlayer animPlayer;
+
+    AnimationTree animationTree;
         // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         currentSprite = GetNode<Sprite>("Sprite");
         animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        animationTree = GetNode<AnimationTree>("AnimationTree");
+
+        //animationTree.Active = true; enlever le commentaire
     }
 
     public override void _PhysicsProcess(float delta)
@@ -42,10 +46,6 @@ public class player : KinematicBody2D
 
          motion.x = motion.Clamped(MAXSPEED).x;
 
-        if(Input.IsActionJustPressed("attack")){
-            animPlayer.Play("attack");
-        }
-
         if (Input.IsActionPressed("ui_left")) {
             motion.x -= ACCEL;
             facing_right = false;
@@ -54,7 +54,9 @@ public class player : KinematicBody2D
             motion.x += ACCEL;
             facing_right = true;
             animPlayer.Play("Run");
-        } else {
+        }else if(Input.IsActionPressed("attack")){
+            animPlayer.Play("attack");
+        }else {
             motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);
             animPlayer.Play("Idle");
         }
