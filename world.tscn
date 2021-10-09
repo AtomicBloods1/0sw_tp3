@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=45 format=2]
 
 [ext_resource path="res://tiles.tres" type="TileSet" id=1]
 [ext_resource path="res://assets/img/viking2.png" type="Texture" id=2]
@@ -89,6 +89,148 @@ tracks/0/keys = {
 "values": [ 18, 19 ]
 }
 
+[sub_resource type="AnimationNodeAnimation" id=19]
+animation = "attack"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "attack"
+
+[sub_resource type="AnimationNodeAnimation" id=21]
+animation = "attack"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "attack"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=23]
+blend_point_0/node = SubResource( 19 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 20 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 21 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 22 )
+blend_point_3/pos = Vector2( 1, 0 )
+
+[sub_resource type="AnimationNodeAnimation" id=38]
+animation = "fall"
+
+[sub_resource type="AnimationNodeAnimation" id=39]
+animation = "fall"
+
+[sub_resource type="AnimationNodeAnimation" id=40]
+animation = "fall"
+
+[sub_resource type="AnimationNodeAnimation" id=41]
+animation = "fall"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=26]
+blend_point_0/node = SubResource( 38 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 39 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 40 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 41 )
+blend_point_3/pos = Vector2( 1, 0 )
+
+[sub_resource type="AnimationNodeAnimation" id=14]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=15]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=16]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeAnimation" id=17]
+animation = "Idle"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=18]
+blend_point_0/node = SubResource( 14 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 15 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 16 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 17 )
+blend_point_3/pos = Vector2( 0, -1 )
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "jump"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "jump"
+
+[sub_resource type="AnimationNodeAnimation" id=29]
+animation = "jump"
+
+[sub_resource type="AnimationNodeAnimation" id=30]
+animation = "jump"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=31]
+blend_point_0/node = SubResource( 27 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 28 )
+blend_point_1/pos = Vector2( 0, 1 )
+blend_point_2/node = SubResource( 29 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 30 )
+blend_point_3/pos = Vector2( 1, 0 )
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=8]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "Run"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "Run"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=11]
+blend_point_0/node = SubResource( 7 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 8 )
+blend_point_1/pos = Vector2( 1, 0 )
+blend_point_2/node = SubResource( 9 )
+blend_point_2/pos = Vector2( 0, -1 )
+blend_point_3/node = SubResource( 10 )
+blend_point_3/pos = Vector2( 0, 1 )
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=25]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=35]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=36]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+
+[sub_resource type="AnimationNodeStateMachine" id=12]
+states/Attack/node = SubResource( 23 )
+states/Attack/position = Vector2( 766, 35 )
+states/Fall/node = SubResource( 26 )
+states/Fall/position = Vector2( 909, 108 )
+states/Idle/node = SubResource( 18 )
+states/Idle/position = Vector2( 766, 108 )
+states/Jump/node = SubResource( 31 )
+states/Jump/position = Vector2( 766, 179 )
+states/Run/node = SubResource( 11 )
+states/Run/position = Vector2( 623, 108 )
+transitions = [ "Idle", "Run", SubResource( 24 ), "Run", "Idle", SubResource( 25 ), "Idle", "Attack", SubResource( 32 ), "Attack", "Idle", SubResource( 33 ), "Idle", "Jump", SubResource( 34 ), "Jump", "Idle", SubResource( 35 ), "Idle", "Fall", SubResource( 36 ), "Fall", "Idle", SubResource( 37 ) ]
+start_node = "Idle"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=13]
+
 [node name="world" type="Node2D"]
 __meta__ = {
 "_edit_horizontal_guides_": [ -40.1583 ]
@@ -111,7 +253,7 @@ __meta__ = {
 texture = ExtResource( 2 )
 hframes = 9
 vframes = 6
-frame = 28
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
 position = Vector2( 2.5, 6.5 )
@@ -130,3 +272,12 @@ anims/fall = SubResource( 5 )
 anims/jump = SubResource( 6 )
 
 [node name="AnimationTree" type="AnimationTree" parent="player"]
+tree_root = SubResource( 12 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 13 )
+parameters/Attack/blend_position = Vector2( 0, 0 )
+parameters/Fall/blend_position = Vector2( 0, 0 )
+parameters/Idle/blend_position = Vector2( 0, 0 )
+parameters/Jump/blend_position = Vector2( 0, 0 )
+parameters/Run/blend_position = Vector2( 0, -0.0206186 )

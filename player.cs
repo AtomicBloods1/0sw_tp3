@@ -17,21 +17,25 @@ public class player : KinematicBody2D
     Vector2 motion = new Vector2();
 
     Sprite currentSprite;
-    AnimationPlayer animPlayer;
-
+    //AnimationPlayer animPlayer;
+    AnimationNodeStateMachinePlayback animationState;
     AnimationTree animationTree;
         // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         currentSprite = GetNode<Sprite>("Sprite");
-        animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        //animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
         animationTree = GetNode<AnimationTree>("AnimationTree");
-
-        //animationTree.Active = true; enlever le commentaire
+        animationState = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
     }
 
     public override void _PhysicsProcess(float delta)
     {
+        var input_vector  = Vector2.Zero;
+        input_vector.x = Input.GetActionStrength("ui_right") - Input.GetActionStrength("ui_left");
+        input_vector.y = Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_jump");
+        input_vector = input_vector.Normalized();
+
         motion.y += GRAVITY;
 
         if(motion.y > MAXFALLSPEED) {
@@ -49,16 +53,20 @@ public class player : KinematicBody2D
         if (Input.IsActionPressed("ui_left")) {
             motion.x -= ACCEL;
             facing_right = false;
-            animPlayer.Play("Run");
+            animationTree.Set("parameters/Run/blend_position",input_vector);
+            animationState.Travel("Run");
         } else if (Input.IsActionPressed("ui_right")) {
             motion.x += ACCEL;
             facing_right = true;
-            animPlayer.Play("Run");
+            animationTree.Set("parameters/Run/blend_position",input_vector);
+            animationState.Travel("Run");
         }else if(Input.IsActionPressed("attack")){
-            animPlayer.Play("attack");
+            animationTree.Set("parameters/Attack/blend_position",input_vector);
+            animationState.Travel("Attack");
         }else {
             motion = motion.LinearInterpolate(Vector2.Zero, 0.2f);
-            animPlayer.Play("Idle");
+            animationTree.Set("parameters/Idle/blend_position",input_vector);
+            animationState.Travel("Idle");
         }
 
         if (IsOnFloor())
@@ -71,9 +79,11 @@ public class player : KinematicBody2D
 
         if (!IsOnFloor()) {
             if (motion.y < 0) {
-                animPlayer.Play("jump");
+                animationTree.Set("parameters/Jump/blend_position",input_vector);
+                animationState.Travel("Jump");
             } else if (motion.y > 0) {
-                animPlayer.Play("fall");
+                animationTree.Set("parameters/Fall/blend_position",input_vector);
+                animationState.Travel("Fall");
             }
         }
 
