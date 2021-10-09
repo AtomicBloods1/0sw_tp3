@@ -24,7 +24,7 @@ public class player : KinematicBody2D
     public override void _Ready()
     {
         currentSprite = GetNode<Sprite>("Sprite");
-        //animPlayer = GetNode<AnimationPlayer>("AnimationPlayer");
+        //animPlayer = GetNode<AnimationPlayer>("AnimationPlayer"); 
         animationTree = GetNode<AnimationTree>("AnimationTree");
         animationState = (AnimationNodeStateMachinePlayback)animationTree.Get("parameters/playback");
     }
