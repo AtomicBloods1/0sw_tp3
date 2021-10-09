@@ -42,6 +42,10 @@ public class player : KinematicBody2D
 
          motion.x = motion.Clamped(MAXSPEED).x;
 
+        if(Input.IsActionJustPressed("attack")){
+            animPlayer.Play("attack");
+        }
+
         if (Input.IsActionPressed("ui_left")) {
             motion.x -= ACCEL;
             facing_right = false;
